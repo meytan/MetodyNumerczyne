@@ -1,0 +1,6 @@
+
+*.xml
+
+/venv
+*.pyc
+.idea/MetodyNumerczyne.iml
