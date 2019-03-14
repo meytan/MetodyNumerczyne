@@ -1,3 +1,4 @@
-from interpolation import interpolation
+from interpolation import newton_interpolation
 
-print(interpolation(1.5))
+
+print(newton_interpolation(6))
