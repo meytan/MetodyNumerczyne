@@ -33,9 +33,9 @@ def difference_quotient(points):
 def newton_interpolation(searched_point, points=readFile.read_points()):
     values = difference_quotient(points)
     result = 0
-    for i in range(0,len(values)):
+    for i in range(0, len(values)):
         tmp = values[i]
         for j in range(0,i):
-            tmp*= (searched_point-points[j][0])
-        result+=tmp
-    return  result
+            tmp *= (searched_point-points[j][0])
+        result += tmp
+    return result
