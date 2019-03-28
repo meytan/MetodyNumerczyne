@@ -1,6 +1,6 @@
 from draw_plot import draw_plot
 from interpolation import newton_interpolation
-from approximation import system_of_equation_cramer
+from system_of_equation import system_of_equation_cramer
 
 #draw_plot(newton_interpolation, [-2, 4])
 

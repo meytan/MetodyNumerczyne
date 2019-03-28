@@ -22,5 +22,3 @@ def system_of_equation_cramer(matrix):
         return None
     return [i/w for i in wi_list]
 
-
-
