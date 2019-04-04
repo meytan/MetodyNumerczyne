@@ -1,3 +1,6 @@
+import json
+
+
 def read_points(filename="./resources/points.txt"):
     try:
         file = open(filename, 'r')
@@ -25,3 +28,10 @@ def read_function(filename="./resources/function.txt"):
         file.close()
 
     return [x.strip() for x in lines]
+
+
+def read_json(key):
+    with open('./resources/test.json') as json_file:
+        data = json.load(json_file)
+        return data[key]
+
