@@ -30,8 +30,8 @@ def read_function(filename="./resources/function.txt"):
     return [x.strip() for x in lines]
 
 
-def read_json(key):
-    with open('./resources/test.json') as json_file:
+def read_json(file ,key):
+    with open(file) as json_file:
         data = json.load(json_file)
         return data[key]
 
