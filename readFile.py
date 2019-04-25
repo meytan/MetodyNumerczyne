@@ -35,3 +35,9 @@ def read_json(key):
         data = json.load(json_file)
         return data[key]
 
+
+def read_json_sys(name = "./resources/systemofequation.json"):
+    with open(name) as json_file:
+        data = json.load(json_file)
+        return data["system"]
+

@@ -22,3 +22,20 @@ def system_of_equation_cramer(matrix):
         return None
     return [i/w for i in wi_list]
 
+
+def system_of_equation_gauss(matrix):
+    for i in range(len(matrix)-1):
+        for j in range (i+1, len(matrix)):
+            coefficient = matrix[j][i]/matrix[i][i]
+            for k in range(i, len(matrix[0])):
+                matrix[j][k] = matrix[j][k] - matrix[i][k]*coefficient
+    results = []
+    for z in range(len(matrix)-1, -1, -1):
+        x1 = matrix[z][len(matrix)]
+        x2 = matrix[z][z]
+        for l in range(z, len(matrix)-1):
+            result = results[l-z]
+            a =matrix[z][l+1]
+            x1 = x1 - a * result
+        results = [x1/x2] + results
+    return results
