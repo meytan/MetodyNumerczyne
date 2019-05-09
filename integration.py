@@ -46,7 +46,7 @@ def monte_carlo_integration(file):
     start, end = read_json(file, "range")
     function = read_json(file, "function")
     generated_points = np.random.uniform(start, end, n)
-    #generated_points = [1.5, 2.6, 3.8, 4.5]
+    # generated_points = [1.5, 2.6, 3.8, 4.5]
     for x in generated_points:
         result += polyval(function, x)
 
