@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import polyval, arange
 
-from readFile import read_json
+from readFile import read_json, read_points
 
 
 def square_integration(file):
@@ -51,3 +51,39 @@ def monte_carlo_integration(file):
         result += polyval(function, x)
 
     return result/n * abs(end - start)
+
+
+def gauss_quadrature_2d():
+    real_points = read_points("./resources/gauss")
+    weight1, weight2 = 1, 1
+    points = (-0.5773502692, 0.5773502692)
+    ksi_derivetive = [[0, 0, 0, 0], [0, 0, 0, 0]]
+    ni_derivetive = [[0, 0, 0, 0], [0, 0, 0, 0]]
+    fun_detj = [[0, 0], [0, 0]]
+    for j in [0, 1]:
+        for i in [0, 1]:
+            ksi_derivetive[j][0] = -0.25*(1.0-points[j])
+            ksi_derivetive[j][1] = 0.25*(1.0-points[j])
+            ksi_derivetive[j][2] = 0.25*(1.0+points[j])
+            ksi_derivetive[j][3] = -0.25*(1.0+points[j])
+            ni_derivetive[i][0] = -0.25*(1.0-points[i])
+            ni_derivetive[i][1] = -0.25*(1.0+points[i])
+            ni_derivetive[i][2] = 0.25*(1.0+points[i])
+            ni_derivetive[i][3] = 0.25*(1.0-points[i])
+
+    for j in [0, 1]:
+        for i in [0, 1]:
+            dxdKSI = ksi_derivetive[j][0]*real_points[0][0] + ksi_derivetive[j][1] * real_points[1][0]+ ksi_derivetive[j][2] * real_points[2][0] + ksi_derivetive[j][3] * real_points[3][0]
+            dydKSI = ksi_derivetive[j][0]*real_points[0][1] + ksi_derivetive[j][1] * real_points[1][1]+ ksi_derivetive[j][2] * real_points[2][1] + ksi_derivetive[j][3] * real_points[3][1]
+            dxdNI = ni_derivetive[j][0]*real_points[0][0] + ni_derivetive[j][1] * real_points[1][0]+ ni_derivetive[j][2] * real_points[2][0] + ni_derivetive[j][3] * real_points[3][0]
+            dydNI = ni_derivetive[j][0]*real_points[0][1] + ni_derivetive[j][1] * real_points[1][1]+ ni_derivetive[j][2] * real_points[2][1] + ni_derivetive[j][3] * real_points[3][1]
+
+            fun_detj[i][j] = dxdKSI*dydNI - dxdNI*dydKSI
+
+    area = 0
+
+    for j in [0, 1]:
+        for i in [0, 1]:
+            area += abs(fun_detj[i][j])*weight1*weight2
+
+    return area
